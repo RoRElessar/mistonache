@@ -31,13 +31,16 @@ gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise'
 gem 'whenever', :require => false
-gem 'ckeditor'
+gem 'ckeditor', github: 'galetahub/ckeditor'
+gem 'non-stupid-digest-assets'
+
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 gem 'font-awesome-sass'
 # gem 'fog', '1.38.0'
 gem 'open-weather'
 gem 'will_paginate'
+gem 'just-datetime-picker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,7 +55,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  gem 'capistrano', '3.5.0'
+  gem 'capistrano', :github => 'capistrano/capistrano'
   gem 'capistrano-rvm'
   gem 'capistrano-nginx'
   gem 'capistrano3-puma'
@@ -60,12 +63,15 @@ group :development do
   gem 'capistrano-rails-db'
   gem 'capistrano-rails-console'
   gem 'capistrano-upload-config'
+
   gem 'sshkit-sudo'
 end
 
-gem 'rails_12factor', group: :production
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo'
+
 
 gem 'russian', '~> 0.6.0'
 

@@ -15,6 +15,7 @@
  */
 
 @import "twitter-bootstrap-static/bootstrap";
+@import 'twitter-bootstrap-static/sprites';
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import 'layers';
@@ -45,21 +46,32 @@
 @import "events";
 @import "kinoshot";
 @import "bootstrap_and_overrides";
+@import "just_datetime_picker/base";
 
 div.background {
+
   min-height: 100%;
-  background-image: url("body_background.jpg");
+  background-image: image-url("body_background.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   -webkit-background-size: cover;
+
 }
 
 div.wrapper {
   width: 1300px;
   margin: auto;
+}
+
+.solid-divider {
+  display: block;
+  border-bottom: 2px solid #000000;
+  position: relative;
+  top: -18px;
+  z-index: 1;
 }
 
 #content {
@@ -109,19 +121,21 @@ div.wrapper {
 .top-slider {
   margin-bottom: 15px;
   .announcement-title {
-    display: block;
-    color: #a8d8ee;
-    font: 30px 'Narbut_Whirl', sans-serif !important;
-    line-height: 40px !important;
-    white-space: normal !important;
-    width: 420px !important;
-    padding: 0 0 10px;
-    text-decoration: none;
-    background-color: transparent;
-    border: 0 none transparent;
-    border-radius: 0 0 0 0;
-    text-align: left;
-    text-transform: uppercase;
+       display: block;
+        color: $white;
+        text-shadow: $black 0 0 2px;
+        font: 18px 'Bookman_Old_Style_Bold', sans-serif !important;
+        left: 13px;
+        white-space: normal !important;
+        width: 420px !important;
+        padding: 0 0 10px !important;
+        padding-right: 10px !important;
+        text-decoration: none;
+        background-color: transparent;
+        border: 0 none transparent;
+        border-radius: 0 0 0 0;
+        text-transform: uppercase;
+        word-wrap: break-word;
   }
   .announcement-body {
     color: $white;
@@ -190,9 +204,9 @@ ul hr:last-child {
   font-size: 12px;
   .logo {
     display: block;
-    background: url("logo-white.png") no-repeat;
+    background: image-url("logo-white.png") no-repeat;
     width: 250px;
-    height: 51px;
+    height: 60px;
     background-size: cover;
     max-width: 100%;
     margin-bottom: 10px;
@@ -227,8 +241,13 @@ ul hr:last-child {
   }
 }
 
+.top-announcement{
+  height: 150px;
+}
+
 .announcement {
   margin-bottom: 5px;
+
   &-author, &-date, &-category {
     @extend .secondary-text;
   }
@@ -316,4 +335,124 @@ ul hr:last-child {
     }
   }
 }
+.go-description{
+  font: 15px 'Bookman_Old_Style_Regular', sans-serif;
+  margin-bottom: 40px;
+}
+.go-title{
+  text-align: center;
+}
 
+.modal-image{
+  img{
+    margin-bottom: 20px !important;
+    margin-right: 15px !important;
+    margin-left: 20px;
+  }
+  float: left;
+}
+.modal-text{
+ margin-left: 20px;
+  margin-right: 20px;
+}
+.event-info{
+  float: bottom;
+}
+.kinishot-links{
+  img{
+    margin-bottom: 20px;
+  }
+  a {
+    margin-bottom: 20px;
+  }
+}
+.banner-top{
+  margin-bottom: 20px;
+}
+.banner-bottom{
+  margin-bottom: 20px;
+}
+.category-sidetitle {
+  font: 20px 'Bookman_Old_Style_Bold', sans-serif;
+
+  .black-link{
+    color: #2E2F30;
+  }
+}
+.navbar{
+  z-index: 1;
+  button{
+    float: left;
+  }
+}
+@media screen and (min-width: 1400px){
+.container{
+  width: 1400px;
+}}
+@media screen and (min-width: 998px) and (max-width: 1400px) {
+  .container{
+    padding: 0;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 998px){
+  .container{
+    max-width: 600px;
+  }
+}
+@media (max-width: 998px) {
+  .navbar-header {
+    float: none;
+  }
+  .navbar-left,.navbar-right {
+    float: none !important;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+  }
+  .navbar-collapse.collapse {
+    display: none!important;
+  }
+  .navbar-nav {
+    float: none!important;
+    margin-top: 7.5px;
+  }
+  .navbar-nav>li {
+    float: none;
+  }
+  .navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .collapse.in{
+    display:block !important;
+  }
+  .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  #header {
+    height: 251px;
+    .divider-nav{
+    margin-top: 20px;
+  }}
+}
+@media screen and (max-width: 1200px) {
+  .pro_che_baners{
+    text-align: center;
+  }
+}

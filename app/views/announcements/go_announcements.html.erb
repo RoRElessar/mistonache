@@ -1,16 +1,16 @@
-<div class="col-lg-7">
+<div class="col-md-7">
   <div class="announcements">
     <% @announcements.each do |announcement| %>
         <div class="row announcement">
           <div class="col-lg-4">
             <div class="announcement-image">
-              <%= link_to image_tag(announcement.main_image.url(:big)), announcement %>
+              <%= link_to image_tag(announcement.main_image.url(:big)), announcement_path(announcement) %>
             </div>
           </div>
           <div class="col-lg-8">
-            <h2 class="announcement-title"><%= link_to announcement.title, announcement %></h2>
+            <h2 class="announcement-title"><%= link_to announcement.title, announcement_path(announcement) %></h2>
             <div class="announcement-body"><%= raw strip_tags(announcement.body).truncate(400) %></div>
-            <div class="announcement-next"><%= link_to 'Читати далі »', announcement %></div>
+            <div class="announcement-next"><%= link_to 'Читати далі »', announcement_path(announcement) %></div>
             <span class="announcement-author">
             <i class="fa fa-user" aria-hidden="true">&nbsp;&nbsp;</i><%= announcement.admin_user.name %>
           </span>
@@ -19,7 +19,7 @@
                                                                            announcement.category if announcement.category %>
           </span>
             <span class="announcement-date">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<%= l announcement.created_at, format: :short %>
+            <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<%= l announcement.published_at, format: :short %>
           </span>
           </div>
         </div>
@@ -27,7 +27,7 @@
     <%= will_paginate @announcements %>
   </div>
 </div>
-<div class="col-lg-3">
+<div class="col-md-3">
   <%= render 'shared/right_bar/banner' %>
-  <%= render 'shared/right_bar/facebook' %>
+  <%= render 'shared/right_bar/facebook', link: 'https://www.facebook.com/agimistonache' %>
 </div>

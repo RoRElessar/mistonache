@@ -1,4 +1,7 @@
 <div class="aside-section">
+  <h5 class="section-header">
+    <span>Календар подій</span>
+  </h5>
   <div class="custom-calendar-wrap">
     <div id="custom-inner">
       <div class="custom-header clearfix">
@@ -15,7 +18,10 @@
 </div>
 <div class="aside-section">
   <ul class="place-filter">
-    <% @places.each do |place| %>
+    <h5 class="section-header">
+      <span>Місце події</span>
+    </h5>
+    <% @places.by_name.each do |place| %>
       <li class="place-name" data-place-id="<%= place.id %>">
         <h3><%= place.name %></h3>
       </li>

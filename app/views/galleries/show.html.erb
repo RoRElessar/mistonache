@@ -1,21 +1,30 @@
-<div class="col-lg-7">
+<div class="col-md-10">
   <div class="gallery">
     <div class="col-lg-12">
-      <h1 class="section-header"><span><%= @gallery.title %></span></h1>
+      <div class="go-title">
+        <h1 class="go-title"><%= @gallery.title %></h1>
+      </div>
+      <div class="gallery-description"><%= @gallery.description %></div>
+      <div class="right">
+        <span class="announcement-author">
+        <i class="fa fa-user" aria-hidden="true"></i>
+          <%= @gallery.admin_user.name %>
+        </span>
+        <span class="announcement-date">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+          <%= l @gallery.created_at, format: :short %>
+        </span>
+      </div>
+      <div class="gallery-bottom-separator"></div>
     </div>
     <div class="row fancybox-outer">
-      <% @gallery.photo.each do |gallery| %>
+      <% @gallery.photo.each do |photo| %>
           <div class="col-lg-4">
-            <a href="<%= gallery %>" rel="gallery<%= @gallery.id %>" class="fancybox gallery-image">
-              <%= image_tag gallery.url(:medium) %>
+            <a href="<%= photo %>" rel="gallery1" class="fancybox gallery-image">
+              <%= image_tag photo.url(:big) %>
             </a>
           </div>
       <% end %>
     </div>
   </div>
-</div>
-<div class="col-lg-3">
-  <%= render partial: 'shared/right_bar/publications' %>
-  <%= render partial: 'shared/right_bar/banner' %>
-  <%= render partial: 'shared/right_bar/facebook' %>
 </div>

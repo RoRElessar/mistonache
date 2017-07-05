@@ -38,6 +38,7 @@
 //= require extensions/revolution.extension.video.min
 // require turbolinks
 //= require ckeditor/init
+//= require just_datetime_picker/nested_form_workaround
 //= require_tree .
 
 $(document).ready( function () {
@@ -252,19 +253,19 @@ $(document).ready( function () {
   /*slick carousel*/
 
   $('.carousel-slider').slick({
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 300,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 5,
+    slidesToScroll: 5,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 5,
+          slidesToScroll: 5,
           infinite: true,
-          dots: true
+          dots: false
         }
       },
       {
@@ -290,6 +291,7 @@ $(document).ready( function () {
   /*fancybox*/
 
   $('.fancybox').fancybox({
-        
+    prevEffect  : 'animate',
+    nextEffect  : 'animate'
   });
 });

@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
-lock "3.8.0"
+lock '3.8.0'
 
-set :repo_url, 'git@github.com:RoRElessar/mistonache.git'
+set :repo_url, 'git@github.com:everlabs/mistonache.git'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 set :user, 'deployer'
@@ -17,6 +17,9 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :config_example_suffix, '.example'
 set :config_files, %w{config/database.yml config/secrets.yml}
 set :puma_conf, "#{shared_path}/config/puma.rb"
+
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+set :nginx_use_ssl, true
 
 namespace :deploy do
   before 'check:linked_files', 'config:push'

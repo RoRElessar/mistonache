@@ -1,22 +1,28 @@
-<% provide(:title, 'Про ГО Місто на Че') %>
-<div class="col-lg-7">
+<% provide(:title, 'Про ГО "Місто на "Че"') %>
+<div class="col-md-7">
+  <div class="go-title">
+    <h1>Асоціація громадських ініціатив </h1>
+    <h1>"Місто на "Че"</h1>
+  </div>
   <%= render 'slider' %>
+  <%= render 'go_description' %>
+  <hr class="text-divider">
   <% @teams.each do |team| %>
     <div class="row team">
       <div class="col-md-12">
-        <h2 class="title"><%= team[0] %></h2>
+        <h2 class="title"><%= GoCategory.find_by_num_of_place(team[0]).name %></h2>
         <% team[1].each_with_index do |person, index| %>
-            <%= raw('<div class="row">') if index % 3 == 0 %>
-            <div class="col-md-4">
+            <%= raw('<div class="row">') if index % 4 == 0 %>
+            <div class="col-xs-4 col-md-3">
               <div class="photo">
-                <%= link_to image_tag(person.photo_url(:small)), persons_url(person),
+                <%= link_to image_tag(person.photo_url(:small)), persons_path(person),
                             {remote: true, class: 'event-poster', 'data-toggle' =>  'modal', 'data-target' => '#modal-window'} %>
               </div>
               <div class="name">
                 <h5><%= person.name %></h5>
               </div>
             </div>
-            <%= raw('</div>') if index % 3 == 2 || index == team[1].count-1 %>
+            <%= raw('</div>') if index % 4 == 3 || index == team[1].count-1 %>
         <% end %>
       </div>
     </div>
@@ -26,9 +32,11 @@
 
 
 </div>
-<div class="col-lg-3">
-  <%= render 'shared/right_bar/publications', title: 'ПУБЛІКАЦІЇ ГО' %>
+<div class="col-md-3">
+  <% @announcements = Announcement.go_feed.order(:published_at).limit(4) %>
+  <%= render 'shared/right_bar/publications', title: 'НОВИНИ ГО' %>
   <%= link_to 'Всі новини ГО', go_announcements_path %>
   <%= render 'shared/right_bar/banner' %>
-  <%= render 'shared/right_bar/facebook' %>
+  <%= render 'shared/right_bar/facebook', link: 'https://www.facebook.com/agimistonache' %>
+  <%= render 'shared/right_bar/second_banner' %>
 </div>

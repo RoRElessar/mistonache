@@ -1,13 +1,13 @@
 class EventsController < ApplicationController
 
   def index
-    @events = Event.where('start_date > ?', Time.now.beginning_of_day)
+    @events = Event.by_date_of_event.where('start_date > ?', Time.now.beginning_of_day).paginate(page: params[:page], per_page: 20)
     @places = Place.all
 
     respond_to do |format|
-      format.html { render 'events/index', locals: { events: Event.all } }
+      format.html { render 'events/index', locals: { events: Event.all.by_date_of_event } }
       if params_valid?(params)
-        format.json { render json: Event.get_month(params[:year], params[:month]), status: :ok }
+        format.json { render json: Event.by_date_of_event.get_month(params[:year], params[:month]), status: :ok }
       else
         format.json { render json: {data: 'Invalid parameters'}, status: :bad_request }
       end
@@ -21,7 +21,7 @@ class EventsController < ApplicationController
 
   def place_id
     respond_to do |format|
-      format.json {  render json: Event.where(place_id: params[:place_id]).all}
+      format.json {  render json: Event.by_date_of_event.where(place_id: params[:place_id]).all}
     end
   end
 

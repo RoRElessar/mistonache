@@ -1,5 +1,5 @@
 <% provide(:title, @announcement.title) %>
-<div class="col-lg-7">
+<div class="col-md-7">
   <div class="single-announcement">
     <div class="row">
       <div class="col-lg-12 flexbox">
@@ -20,13 +20,38 @@
       <div class="col-lg-12">
         <span class="announcement-author right"><i class="fa fa-user" aria-hidden="true">&nbsp;&nbsp;</i><%= @announcement.admin_user.name %></span>
         <span class="announcement-category right"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;<%= link_to @announcement.category.name, @announcement.category %></span>
-        <span class="announcement-date right"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<%= l @announcement.created_at, format: :short %></span>
+        <span class="announcement-date right"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<%= l @announcement.published_at, format: :long %></span>
       </div>
     </div>
   </div>
 </div>
-<div class="col-lg-3">
-  <%= render partial: 'shared/right_bar/publications' %>
-  <%= render partial: 'shared/right_bar/banner' %>
-  <%= render partial: 'shared/right_bar/facebook' %>
+<div class="col-md-3">
+  <% if @announcement.go_feed  %>
+      <% @announcements = @go_announcements %>
+      <% @announcements = Announcement.go_feed.order(:published_at).limit(4) %>
+      <%= render partial: 'shared/right_bar/publications', locals: { title: 'Новини ГО' } %>
+      <%= link_to 'Всі новини Го', go_announcements_path %>
+      <%= render partial: 'shared/right_bar/banner' %>
+      <%= render 'shared/right_bar/facebook', link: 'https://www.facebook.com/agimistonache' %>
+  <% elsif  @announcement.kinoshot_feed %>
+      <% @announcements = @kinoshot_announcements %>
+      <% @announcements = Announcement.kinoshot_feed.order(:published_at).limit(4) %>
+      <%= render partial: 'shared/right_bar/publications', locals: { title: 'Новини Кіношоту' } %>
+      <%= link_to 'Всі новини Кіношоту', kinoshot_announcements_path %>
+      <%= render partial: 'shared/right_bar/banner' %>
+      <%= render 'shared/right_bar/facebook', link: 'https://www.facebook.com/kinoshotfest' %>
+  <% elsif  @announcement.mat_feed %>
+      <% @announcements = @mat_announcements %>
+      <% @announcements = Announcement.mat_feed.order(:published_at).limit(4) %>
+      <%= render partial: 'shared/right_bar/publications', locals: { title: 'Новини Мату' } %>
+      <%= link_to 'Всі новини МАТу', announcements_path %>
+      <%= render partial: 'shared/right_bar/banner' %>
+      <%= render 'shared/right_bar/facebook', link: 'https://www.facebook.com/theatremat'  %>
+      <% else %>
+      <% @announcements = Announcement.announcements_feed.order(:published_at).limit(4) %>
+      <%= render partial: 'shared/right_bar/publications', locals: { title: 'Публікації' } %>
+      <%= link_to 'Всі новини', announcements_path %>
+      <%= render partial: 'shared/right_bar/banner' %>
+      <%= render 'shared/right_bar/facebook', link: 'https://www.facebook.com/mistoche'  %>
+  <% end %>
 </div>

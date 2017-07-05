@@ -38,3 +38,17 @@
 .info-alert {
   color: #ff0000;
 }
+
+.notation {
+  margin-left: 1%;
+}
+
+.photo-list {
+  li {
+    float: left;
+    margin-right: 4px;
+    &last-child {
+      margin-right: 0;
+    }
+  }
+}

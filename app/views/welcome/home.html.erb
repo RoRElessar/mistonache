@@ -1,9 +1,9 @@
-<div class="col-lg-7">
+<div class="col-md-7">
   <%= render 'slider' if @announcements.static.any? %>
   <%= if @banners[:top].present?
         image_url = image_tag @banners[:top].image.url, class: 'banner-top'
         if not @banners[:top].url.empty?
-          link_to image_url, @banners[:top].url
+          link_to image_url, @banners[:top].url, target: :_blank
         else
           image_url
         end
@@ -14,30 +14,22 @@
   <%= if @banners[:bottom].present?
         image_url = image_tag @banners[:bottom].image.url, class: 'banner-bottom'
         if not @banners[:bottom].url.empty?
-          link_to image_url, @banners[:bottom].url
+          link_to image_url, @banners[:bottom].url, target: :_blank
         else
           image_url
         end
       end
   %>
 
-  <% if @gallery.present? and not @gallery.photo.empty? %>
-      <section class="galleries-slider">
-        <h2 class="section-header">
-          <span>Фотогалерея міста на "Че"</span>
-        </h2>
-        <div class="carousel-slider">
-          <% @gallery.photo.each do |gallery| %>
-              <a href="<%= gallery %>" rel="gallery<%= @gallery.id %>" class="fancybox slider-image">
-                <%= image_tag gallery.url(:medium) %>
-              </a>
-          <% end %>
-        </div>
-      </section>
-  <% end %>
+  <h2 class="section-header">
+    <span>Фотогалерея міста на "Че"</span>
+  </h2>
+
 </div>
-<div class="col-lg-3">
+<div class="col-md-3">
+  <% @announcements = Announcement.announcements_feed.order(:published_at).limit(4) %>
   <%= render 'shared/right_bar/publications', title: 'Публікації' %>
-  <%= render 'shared/right_bar/banner' %>
-  <%= render 'shared/right_bar/facebook' %>
+  <%= link_to 'Всі новини', announcements_path %>
+  <%= render 'shared/right_bar/banner'%>
+  <%= render 'shared/right_bar/facebook', link: 'https://www.facebook.com/mistoche' %>
 </div>

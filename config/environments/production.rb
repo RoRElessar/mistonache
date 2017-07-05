@@ -4,6 +4,8 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
+  config.serve_static_assets = true
+
   config.assets.precompile += ['active_admin.css']
 
   # Eager load code on boot. This eager loads most of Rails and
@@ -11,6 +13,7 @@ Rails.application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
+
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false

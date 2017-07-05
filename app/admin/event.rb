@@ -12,9 +12,9 @@ ActiveAdmin.register Event do
     f.inputs do
       f.input :image, as: :file
       f.input :title
-      f.input :description
+      f.input :description, as: :ckeditor
       f.input :place
-      f.input :start_date
+      f.input :start_date, as: :datetime_select
     end
     f.actions
   end

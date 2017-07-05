@@ -1,0 +1,89 @@
+<% provide(:title, 'MAT') %>
+<div class="col-md-7">
+  <div class="go-title">
+    <h1 class="go-title">Майстерня Актуальної Творчості</h1>
+  </div>
+
+  <% if @announcements.any? %>
+      <%= render 'slider' %>
+  <% end %>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8 kinoshot-announcements">
+
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="kinoshot-container">
+    <div class="col-lg-6 kinishot-links">
+      <p class="pro-fest-title">Репертуар</p>
+
+      <% if @repertoiries.present? %>
+          <%  @repertoiries.each do |banner| %>
+          <%= link_to image_tag(banner.first_image.url(:medium), class:'img-responsive'), repertoir_path(banner) ,{ remote: true,
+                                                                                 'data-toggle' =>  'modal',
+                                                                                 'data-target' => '#modal-window'} %> <br>
+          <% end %>
+      <% end %>
+
+    </div>
+    <div class="col-lg-6">
+      <div class="pro-fest">
+        <p class="pro-fest-title">Про МАТ</p>
+        <p class="pro-fest-text">
+          Майстерня Актуальної Творчості (МАТ) - це мистецький простір,
+          який ставить за мету заохотити черкасців до відвідування культурно-просвітницьких заходів,
+          об’єднати людей різних поколінь, професій та смаків та реалізовувати творчі ініціативи черкащан.
+        </p>
+      </div>
+      <br><br>
+      <div class="pozakonkursna-programa">
+        <p class="pro-fest-text">
+          МАТ прагне підвищити загальний культурний рівень населення у сфері сучасного українського мистецтва,
+          розбурхати театральну свідомість містян, надихнути молодь до втілення творчих ідей, витягти
+          черкасців із обладунків смиренності перед звичними типовими буднями та вразити мистецьким вірусом,
+          без якого вони не зможуть повноцінно жити, залучати широку аудиторію до культурних та мистецьких
+          заходів, підвищити рівень туристичної привабливості міста, об’єднати партнерські та спонсорські
+          організації, діячів мистецтва, інститутів влади та неурядових організацій навколо мистецтва.
+        </p>
+      </div>
+      <br><br>
+      <div class="for-kinomans">
+        <p class="pro-fest-text">
+          МАТ — це унікальний для Черкас мистецький проект покликаний здійснити своєрідну культурну революцію у місті!
+        </p>
+      </div>
+    </div>
+    <div class="col-md-12"><hr class="text-divider"></div>
+    <% @teams.each do |team| %>
+
+        <div class="row team">
+          <div class="col-md-12">
+            <h2 class="title"><%= MatCategory.find_by_num_of_place(team[0]).name %></h2>
+            <% team[1].each_with_index do |person, index| %>
+                <%= raw('<div class="row">') if index % 4 == 0 %>
+                <div class="col-xs-4  col-md-3">
+                  <div class="photo">
+                    <%= link_to image_tag(person.photo_url(:small)), persons_path(person),
+                                {remote: true, class: 'event-poster', 'data-toggle' =>  'modal', 'data-target' => '#modal-window'} %>
+                  </div>
+                  <div class="name">
+                    <h5><%= person.name %></h5>
+                  </div>
+                </div>
+                <%= raw('</div>') if index % 4 == 3 || index == team[1].count-1 %>
+            <% end %>
+          </div>
+        </div>
+        <hr>
+    <% end %>
+  </div>
+</div>
+
+<div class="col-md-3">
+  <% @announcements = Announcement.mat_feed.order(:published_at).limit(4) %>
+  <%= render 'shared/right_bar/publications', title: 'Новини Мату' %>
+  <%= link_to 'Всі новини МАТу', mat_announcements_path %>
+  <%= render 'shared/right_bar/banner' %>
+  <%= render 'shared/right_bar/facebook', link: 'https://www.facebook.com/theatremat' %>
+</div>
